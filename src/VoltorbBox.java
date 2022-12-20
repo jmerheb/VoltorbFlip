@@ -23,7 +23,7 @@ public class VoltorbBox{
         this.cornerNote = cornerNote;
 
         try {
-            flipImg = ImageIO.read(new File ("VoltorbFlipped.png"));
+            flipImg = ImageIO.read(new File ("../PNGs/VoltorbFlipped.png"));
         } catch(IOException e){e.printStackTrace();}
 
         noteClicked = false;
@@ -35,5 +35,37 @@ public class VoltorbBox{
                 && clicky >= y
                 && clickx < x + flipImg.getWidth(null)/2
                 && clicky < y + flipImg.getHeight(null)/2;
+    }
+
+    public void setFlipClicked(boolean flipClicked) {
+        this.flipClicked = flipClicked;
+    }
+
+    public void setNoteClicked(boolean noteClicked) {
+        this.noteClicked = noteClicked;
+    }
+
+    public boolean getNoteClicked() {
+        return noteClicked;
+    }
+
+    public boolean getFlipClicked() {
+        return flipClicked;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

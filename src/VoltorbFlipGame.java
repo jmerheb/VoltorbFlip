@@ -1,3 +1,5 @@
+package src;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.awt.Font;
 import java.text.NumberFormat;
 import java.awt.Color;
 import java.awt.Rectangle;
+import src.VoltorbBox;
 
 /* Temp
 import java.awt.Graphics2D;
@@ -50,11 +53,11 @@ public class VoltorbFlipGame extends JPanel {
 
     public VoltorbFlipGame() {
         try {
-            gameBoard = ImageIO.read(getClass().getResourceAsStream("VoltorbBoard.png"));
-            flipImg = ImageIO.read(new File ("VoltorbFlipped.png"));
-            voltorb = ImageIO.read(new File ("Voltorb.png"));
-            volNote = ImageIO.read(new File ("Note.png"));
-            flipWin = ImageIO.read(new File ("VoltorbWindow.png"));
+            gameBoard = ImageIO.read(getClass().getResourceAsStream("../PNGs/VoltorbBoard.png"));
+            flipImg = ImageIO.read(new File ("../PNGs/VoltorbFlipped.png"));
+            voltorb = ImageIO.read(new File ("../PNGs/Voltorb.png"));
+            volNote = ImageIO.read(new File ("../PNGs/Note.png"));
+            flipWin = ImageIO.read(new File ("../PNGs/VoltorbWindow.png"));
         } catch(IOException e){e.printStackTrace();}
 
         notesOn = false;
@@ -191,13 +194,13 @@ public class VoltorbFlipGame extends JPanel {
             int twoThreeCheck = 0;
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
-                    if (boxes[i][j].noteClicked) {
+                    if (boxes[i][j].getNoteClicked()) {
                         notes[i][j] = true;
                     }
 
-                    if (boxes[i][j].flipClicked) {
-                        int xplace = boxes[i][j].x;
-                        int yplace = boxes[i][j].y;
+                    if (boxes[i][j].getFlipClicked()) {
+                        int xplace = boxes[i][j].getX();
+                        int yplace = boxes[i][j].getY();
                         g.drawImage(flipImg, xplace, yplace, 68, 69, null);
                         if (values[i][j] == 0) {
                             g.drawImage(voltorb, xplace + 13, yplace + 13, 43, 43, null);
@@ -222,9 +225,9 @@ public class VoltorbFlipGame extends JPanel {
 
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
-                    if (notes[i][j] == true && boxes[i][j].flipClicked == false && boxes[i][j].noteClicked) {
-                        int xplace = boxes[i][j].x;
-                        int yplace = boxes[i][j].y;
+                    if (notes[i][j] == true && boxes[i][j].getFlipClicked() == false && boxes[i][j].getNoteClicked()) {
+                        int xplace = boxes[i][j].getX();
+                        int yplace = boxes[i][j].getY();
                         g.drawImage(volNote, xplace + 50, yplace + 6, 16, 16, null);
                     }
                 }
@@ -295,19 +298,19 @@ public class VoltorbFlipGame extends JPanel {
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
                     if (boxes[i][j].isClicked(clickx, clicky) && notesOn) {
-                        if (boxes[i][j].noteClicked) {
-                            boxes[i][j].noteClicked = false;
+                        if (boxes[i][j].getNoteClicked()) {
+                            boxes[i][j].setNoteClicked(false);
                         }
                         else {
-                            boxes[i][j].noteClicked = true;
+                            boxes[i][j].setNoteClicked(true);
                         }
                     }
                     else if (boxes[i][j].isClicked(clickx, clicky) && notesOn == false) {
-                        boxes[i][j].flipClicked = true;
+                        boxes[i][j].setFlipClicked(true);
                     }
-                    if (boxes[i][j].flipClicked && boxes[i][j].noteClicked) {
-                        boxes[i][j].flipClicked = true;
-                        boxes[i][j].noteClicked = false;
+                    if (boxes[i][j].getFlipClicked() && boxes[i][j].getNoteClicked()) {
+                        boxes[i][j].setFlipClicked(true);
+                        boxes[i][j].setNoteClicked(false);
                     }
                     repaint();
                 }
