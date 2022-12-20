@@ -23,7 +23,7 @@ public class VoltorbBox{
         this.cornerNote = cornerNote;
 
         try {
-            flipImg = ImageIO.read(new File ("../PNGs/VoltorbFlipped.png"));
+            flipImg = ImageIO.read(new File ("src/PNGs/VoltorbFlipped.png"));
         } catch(IOException e){e.printStackTrace();}
 
         noteClicked = false;

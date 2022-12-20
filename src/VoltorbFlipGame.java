@@ -53,11 +53,11 @@ public class VoltorbFlipGame extends JPanel {
 
     public VoltorbFlipGame() {
         try {
-            gameBoard = ImageIO.read(getClass().getResourceAsStream("../PNGs/VoltorbBoard.png"));
-            flipImg = ImageIO.read(new File ("../PNGs/VoltorbFlipped.png"));
-            voltorb = ImageIO.read(new File ("../PNGs/Voltorb.png"));
-            volNote = ImageIO.read(new File ("../PNGs/Note.png"));
-            flipWin = ImageIO.read(new File ("../PNGs/VoltorbWindow.png"));
+            gameBoard = ImageIO.read(new File("src/PNGs/VoltorbBoard.png"));
+            flipImg = ImageIO.read(new File ("src/PNGs/VoltorbFlipped.png"));
+            voltorb = ImageIO.read(new File ("src/PNGs/Voltorb.png"));
+            volNote = ImageIO.read(new File ("src/PNGs/Note.png"));
+            flipWin = ImageIO.read(new File ("src/PNGs/VoltorbWindow.png"));
         } catch(IOException e){e.printStackTrace();}
 
         notesOn = false;
