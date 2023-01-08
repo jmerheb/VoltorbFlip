@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.JFrame;
+//import javax.swing.SwingUtilities;
+//import javax.swing.JFrame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.io.File;
@@ -23,7 +23,6 @@ import java.awt.Graphics2D;
 import java.awt.BasicStroke;
 
 checklist:
-- fix score
 - clean up
     - possibly make boxes myself
     - flip all when you win
@@ -37,8 +36,7 @@ public class VoltorbFlipGame extends JPanel {
     int[][] values;
     int[] counters1, counters2, vcount1, vcount2;
     int level;
-    int score;
-    int levelScore;
+    int score, levelScore, tempScore;
     int twoThreeCount;
     boolean[][] notes;
     boolean notesOn;
@@ -189,7 +187,7 @@ public class VoltorbFlipGame extends JPanel {
             g.setFont(font1);
             Color customColor = new Color(40, 40, 40);
             g.setColor(customColor);
-            score = 0;
+            tempScore = 0;
 
             int twoThreeCheck = 0;
             for (int i = 0; i < 5; i++) {
@@ -208,11 +206,11 @@ public class VoltorbFlipGame extends JPanel {
                         }
                         else if (values[i][j] == 1) {
                             g.drawString(Integer.toString(values[i][j]) , xplace + 27, yplace + 42);
-                            score += values[i][j];
+                            tempScore += values[i][j];
                         }
                         else {
                             g.drawString(Integer.toString(values[i][j]) , xplace + 27, yplace + 42);
-                            score += values[i][j];
+                            tempScore += values[i][j];
 
                             twoThreeCheck++;
                             if (twoThreeCount == twoThreeCheck) {
@@ -262,7 +260,7 @@ public class VoltorbFlipGame extends JPanel {
             final int xSCORE = 265;
             final int ySCORE = 30;
             g.drawString("Level: " + Integer.toString(level), xLEVEL, yLEVEL);
-            g.drawString("Score: " + Integer.toString(score), xSCORE, ySCORE);
+            g.drawString("Score: " + Integer.toString(score + tempScore), xSCORE, ySCORE);
 
             //Flip and Note buttons
             g.setFont(font3);
@@ -278,7 +276,7 @@ public class VoltorbFlipGame extends JPanel {
             g.drawImage(flipWin, 0, 0, 500, 528, null);
             g.drawString("GAMEOVER", 130, 185);
             g.setFont(font3);
-            g.drawString("Level: " + level + "    Score: " + score, 135, 250);
+            g.drawString("Level: " + level + "    Score: " + (score + tempScore), 135, 250);
             g.drawString("Would you like to play again?", 80, 300);
             g.drawString("Yes               No", 150, 350);
         }

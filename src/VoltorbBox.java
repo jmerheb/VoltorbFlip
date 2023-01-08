@@ -1,9 +1,9 @@
 package src;
 
-import java.awt.Graphics;
+//import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
+//import java.awt.event.MouseEvent;
+//import java.awt.event.MouseAdapter;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;

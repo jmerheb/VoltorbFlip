@@ -2,7 +2,7 @@ package src;/*
  * This class provides the window the game appears in and handles
  * game start and stop. It provides the main() method.
  */
-import java.awt.GridLayout;
+//import java.awt.GridLayout;
 import javax.swing.JFrame;
 import java.awt.image.BufferedImage;
 import src.VoltorbBox;
@@ -19,7 +19,7 @@ public class VoltorbFlip extends JFrame {
 
         frame = new JFrame("Voltorb Flip");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(frameWidth.getWidth() / 2, frameHeight.getHeight() / 2 + 28 /*hard # is height of window*/ );
+        frame.setSize(frameWidth.getWidth() / 2, frameHeight.getHeight() / 2 + 28 /*hard # are for tab frame*/ );
         frame.setResizable(false);
         frame.add(screen);
         frame.setVisible(true);
