@@ -2,16 +2,14 @@ package src;/*
  * This class provides the window the game appears in and handles
  * game start and stop. It provides the main() method.
  */
-//import java.awt.GridLayout;
 import javax.swing.JFrame;
 import java.awt.image.BufferedImage;
-import src.VoltorbBox;
-import src.VoltorbFlipGame;
 
 public class VoltorbFlip extends JFrame {
     public static VoltorbFlipGame screen;
     public static JFrame frame;
 
+    //Creates the screen and initializes the game
     public static void main(String[] args) {
         screen = new VoltorbFlipGame();
         BufferedImage frameWidth = screen.gameBoard;

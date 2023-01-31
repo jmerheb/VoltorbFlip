@@ -1,13 +1,11 @@
 package src;
 
-//import java.awt.Graphics;
 import java.awt.Image;
-//import java.awt.event.MouseEvent;
-//import java.awt.event.MouseAdapter;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
+//
 public class VoltorbBox{
     int x;
     int y;
@@ -16,6 +14,7 @@ public class VoltorbBox{
     boolean flipClicked, noteClicked;
     boolean cornerNote;
 
+    //class created to make Voltorb box objects
     public VoltorbBox(int intx, int inty, int value, boolean cornerNote) {
         x = intx;
         y = inty;
@@ -30,6 +29,7 @@ public class VoltorbBox{
         flipClicked = false;
     }
 
+    //method to check if something is clicked in the correct hotbox
     public boolean isClicked(int clickx, int clicky) {
         return clickx >= x
                 && clicky >= y
@@ -37,6 +37,7 @@ public class VoltorbBox{
                 && clicky < y + flipImg.getHeight(null)/2;
     }
 
+    //set and get methods for class variables
     public void setFlipClicked(boolean flipClicked) {
         this.flipClicked = flipClicked;
     }

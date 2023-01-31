@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-//import javax.swing.SwingUtilities;
-//import javax.swing.JFrame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.io.File;
@@ -16,19 +14,6 @@ import java.awt.Font;
 import java.text.NumberFormat;
 import java.awt.Color;
 import java.awt.Rectangle;
-import src.VoltorbBox;
-
-/* Temp
-import java.awt.Graphics2D;
-import java.awt.BasicStroke;
-
-checklist:
-- clean up
-    - possibly make boxes myself
-    - flip all when you win
-    - fix click before gameover (?)
-    - hardcoded #s (?)
-*/
 
 public class VoltorbFlipGame extends JPanel {
     VoltorbBox[][] boxes;
@@ -49,6 +34,7 @@ public class VoltorbFlipGame extends JPanel {
     public BufferedImage gameBoard;
     Rectangle rect1, rect2, rect3, rect4;
 
+    //sets up initial values and PNGs and starts game
     public VoltorbFlipGame() {
         try {
             gameBoard = ImageIO.read(new File("src/PNGs/VoltorbBoard.png"));
@@ -67,6 +53,7 @@ public class VoltorbFlipGame extends JPanel {
         addMouseListener(new FlipMouseAdapter());
     }
 
+    //sets up game
     public void setUp() {
         setRanValues();
         gameover = false;
@@ -138,11 +125,12 @@ public class VoltorbFlipGame extends JPanel {
         rect1 = new Rectangle(414, 455, 68, 33);
         rect2 = new Rectangle(414, 490, 68, 33);
 
-        //set up yes and no rects
+        //set up yes and no buttons
         rect3 = new Rectangle(140, 325, 60, 35);
         rect4 = new Rectangle(280, 325, 60, 35);
     }
 
+    //randomizes board every level
     public void setRanValues() {
         values = new int[5][5];
         Random ran = new Random();
@@ -165,24 +153,15 @@ public class VoltorbFlipGame extends JPanel {
         }
     }
 
+    //method that makes sure everything that should be painted on the GUI is there everytime the mouse is clicked
     public void paint(Graphics g) {
         Font font1 = new Font("Al Bayan", 1, 23);
         Font font2 = new Font("Al Bayan", 1, 15);
         Font font3 = new Font("Al Bayan", 1, 20);
         Font font4 = new Font("Al Bayan", 1, 35);
 
-        if (gameover == false) {
+        if (!gameover) {
             g.drawImage(gameBoard, 0, 0, gameBoard.getWidth()/2, gameBoard.getHeight()/2, null);
-
-        /*TEMP
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setStroke(new BasicStroke(1.0f));
-        Color customColor5 = new Color(255,255,0);
-        g2d.setColor(customColor5);
-        int[] mxa = new int[] {414, 482, 482 , 414, 414};
-        int[] mya= new int[] {490, 490, 523, 523, 490};
-        g2d.drawPolyline(mxa, mya, mxa.length);
-        */
 
             g.setFont(font1);
             Color customColor = new Color(40, 40, 40);
@@ -223,7 +202,7 @@ public class VoltorbFlipGame extends JPanel {
 
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
-                    if (notes[i][j] == true && boxes[i][j].getFlipClicked() == false && boxes[i][j].getNoteClicked()) {
+                    if (notes[i][j] && !boxes[i][j].getFlipClicked() && boxes[i][j].getNoteClicked()) {
                         int xplace = boxes[i][j].getX();
                         int yplace = boxes[i][j].getY();
                         g.drawImage(volNote, xplace + 50, yplace + 6, 16, 16, null);
@@ -262,7 +241,7 @@ public class VoltorbFlipGame extends JPanel {
             g.drawString("Level: " + Integer.toString(level), xLEVEL, yLEVEL);
             g.drawString("Score: " + Integer.toString(score + tempScore), xSCORE, ySCORE);
 
-            //Flip and Note buttons
+            //flip and Note buttons
             g.setFont(font3);
             final int xFLIP = 420;
             final int yFLIP = 480;
@@ -282,6 +261,7 @@ public class VoltorbFlipGame extends JPanel {
         }
     }
 
+    //resets for the next level
     public void win() {
         level++;
         score += levelScore;
@@ -289,6 +269,7 @@ public class VoltorbFlipGame extends JPanel {
         repaint();
     }
 
+    //class used to monitor mouse clicking
     class FlipMouseAdapter extends MouseAdapter {
         public void mouseClicked(MouseEvent e) {
             int clickx = e.getX();
@@ -303,7 +284,7 @@ public class VoltorbFlipGame extends JPanel {
                             boxes[i][j].setNoteClicked(true);
                         }
                     }
-                    else if (boxes[i][j].isClicked(clickx, clicky) && notesOn == false) {
+                    else if (boxes[i][j].isClicked(clickx, clicky) && !notesOn) {
                         boxes[i][j].setFlipClicked(true);
                     }
                     if (boxes[i][j].getFlipClicked() && boxes[i][j].getNoteClicked()) {
